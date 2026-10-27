@@ -370,9 +370,6 @@ html[lang="zh-Hans"] .pitem__t { letter-spacing: 0; }
 .leader__plate {
   position: relative; aspect-ratio: 1 / 1; width: 100%; max-width: 400px;
   overflow: hidden;
-  background:
-    radial-gradient(70% 60% at 50% 38%, rgba(255,255,255,.10), transparent 70%),
-    linear-gradient(180deg, #2A313C 0%, var(--navy) 55%, var(--navy-deep) 100%);
 }
 .leader__plate::after {
   content: ""; position: absolute; z-index: 1; left: 0; bottom: 0; width: 56px; height: 3px; background: var(--coral);
