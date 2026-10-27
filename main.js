@@ -431,17 +431,49 @@
       root.classList.add("lang-out");
       langTimer = setTimeout(function () {
         applyLang(lang);
+        layoutNav();
         langTimer = setTimeout(function () { root.classList.remove("lang-out"); }, 30);
       }, LANG_FADE_MS);
     });
   }
 
-  /* ---------- Nav hairline on scroll ---------- */
+  /* ---------- Nav state on scroll: capsule offset, active-section dot ---------- */
+  var dot = menu && menu.querySelector(".menu__dot");
+  var navLinks = menu ? Array.prototype.slice.call(menu.querySelectorAll('a[href^="#"]')) : [];
+  var spyTargets = navLinks.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+  var activeLink = null;
+
+  // Offsets use offsetLeft/offsetWidth, which ignore the capsule's own transform.
+  function layoutNav() {
+    if (!menu || !nav) return;
+    var shift = (nav.clientWidth - menu.offsetWidth) / 2 - menu.offsetLeft;
+    menu.style.setProperty("--menu-x", Math.round(shift) + "px");
+    if (dot && activeLink) dot.style.setProperty("--dot-x", Math.round(activeLink.offsetLeft + activeLink.offsetWidth / 2 - 3) + "px");
+  }
+
+  function spy() {
+    var line = window.innerHeight * 0.4, next = null;
+    for (var k = 0; k < spyTargets.length; k++) {
+      if (spyTargets[k] && spyTargets[k].getBoundingClientRect().top <= line) next = navLinks[k];
+    }
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) next = navLinks[navLinks.length - 1];
+    if (next === activeLink) return;
+    if (activeLink) activeLink.classList.remove("is-active");
+    activeLink = next;
+    if (activeLink) activeLink.classList.add("is-active");
+    if (dot) dot.classList.toggle("is-on", !!activeLink);
+    layoutNav();
+  }
+
   function onScroll() {
     if (nav) nav.classList.toggle("is-scrolled", window.scrollY > 8);
+    spy();
   }
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", layoutNav, { passive: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutNav);
   onScroll();
+  layoutNav();
 
   /* ---------- Reveal on scroll ---------- */
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
