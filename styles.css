@@ -23,6 +23,7 @@
   --gutter: clamp(20px, 4vw, 48px);
   --sec: clamp(96px, 12vw, 168px);
   --ease: cubic-bezier(.2, .7, .1, 1);
+  --tick-h: 68px;
 }
 
 
@@ -186,10 +187,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 /* ---------- Hero ---------- */
 .hero {
-  position: relative; min-height: 100vh; min-height: 100svh;
+  /* First screen = hero + ticker; everything below scales with viewport height so the ticker sits on the fold. */
+  position: relative; min-height: calc(100vh - var(--tick-h)); min-height: calc(100svh - var(--tick-h));
   display: flex; flex-direction: column; justify-content: flex-end;
   color: var(--white); background: var(--navy); overflow: hidden;
 }
+.hero:has(+ .ticker[hidden]) { min-height: 100vh; min-height: 100svh; }
 .hero__media { position: absolute; inset: 0; }
 .hero__media img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 60%;
@@ -218,32 +221,38 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .intro-fast .hero__media::after { transition-duration: .5s; transition-delay: 0s; }
 .intro-fast .nav, .intro-fast .hero__strip, .intro-fast .ticker { transition-delay: .3s; }
 
-.hero__body { position: relative; padding-top: 160px; padding-bottom: 72px; }
+.hero__body { position: relative; padding-top: clamp(92px, 14svh, 160px); padding-bottom: clamp(28px, 5svh, 72px); }
 .hero__title {
-  margin-top: 32px;
+  margin-top: clamp(14px, 3svh, 32px);
   font-family: var(--display); font-weight: 600;
-  font-size: clamp(56px, 9.4vw, 148px);
+  font-size: clamp(44px, min(9.4vw, 12svh), 148px);
   line-height: .94; letter-spacing: -0.05em;
 }
 .hero__title > span { display: block; }
 .hero__accent { color: rgba(255,255,255,.42); }
-.hero__title [lang="zh-Hans"] { letter-spacing: 0; line-height: 1.12; font-weight: 700; font-size: clamp(52px, 8vw, 120px); }
+.hero__title [lang="zh-Hans"] { letter-spacing: 0; line-height: 1.12; font-weight: 700; font-size: clamp(40px, min(8vw, 11svh), 120px); }
 
 .hero__foot {
-  margin-top: 56px;
+  margin-top: clamp(22px, 5svh, 56px);
   display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap;
 }
 .hero__lead { font-size: clamp(18px, 1.5vw, 21px); line-height: 1.55; color: rgba(255,255,255,.78); }
-.hero__lead [lang="en"] { max-width: 34ch; }
+.hero__lead [lang="en"] { max-width: 40ch; }
 .hero__lead [lang="zh-Hans"] { max-width: 24em; }
 .hero__ctas { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+@media (min-width: 761px) and (max-height: 700px) {
+  .hero__title { font-size: clamp(44px, min(9.4vw, 11svh), 148px); }
+  .hero__title [lang="zh-Hans"] { font-size: clamp(40px, min(8vw, 10svh), 120px); }
+  .hero__lead { font-size: 17px; }
+  .hero__foot { margin-top: 20px; }
+}
 
 .hero__strip { position: relative; border-top: 1px solid var(--navy-line); }
 .strip {
   display: grid; grid-template-columns: repeat(5, 1fr);
   font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.55);
 }
-.strip li { padding: 22px 0; }
+.strip li { padding: clamp(12px, 2.2svh, 22px) 0; }
 .strip li + li { padding-left: 24px; border-left: 1px solid var(--navy-line); }
 
 /* ---------- Live ticker ---------- */
@@ -251,7 +260,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: relative; display: flex; align-items: stretch;
   background: var(--navy-deep); color: var(--white);
   border-top: 1px solid var(--navy-line);
-  height: 68px; overflow: hidden;
+  height: var(--tick-h); overflow: hidden;
 }
 .ticker[hidden] { display: none; }
 .ticker__viewport {
@@ -465,8 +474,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .brand__sub { display: none; }
   .brand__mark { width: 36px; height: 36px; }
 
-  .hero__body { padding-top: 120px; padding-bottom: 48px; }
-  .hero__foot { margin-top: 40px; }
+  .hero__body { padding-top: clamp(96px, 14svh, 120px); padding-bottom: clamp(24px, 4svh, 48px); }
+  .hero__foot { margin-top: clamp(20px, 4svh, 40px); }
   .hero__ctas { gap: 24px; flex-direction: column; align-items: flex-start; }
   .btn { height: 52px; padding: 0 22px; font-size: 14px; }
   .strip { grid-template-columns: repeat(2, 1fr); }
@@ -475,8 +484,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .strip li:nth-child(even) { padding-left: 16px; border-left: 1px solid var(--navy-line); }
   .strip li:nth-child(n+3) { border-top: 1px solid var(--navy-line); }
   .strip li:last-child { display: none; }
+  .hero__strip { display: none; } /* phones: keep the first screen to hero + ticker */
 
-  .ticker { height: 60px; }
+  :root { --tick-h: 60px; }
   .tk { padding: 0 20px; gap: 10px; }
   .tk__logo { width: 26px; height: 26px; }
 
