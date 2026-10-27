@@ -73,7 +73,7 @@
       "leadership.title": "Leadership",
       "leadership.role": "Founder & President",
       "leadership.name": "Lucas (ZhiYao) Yan",
-      "leadership.bio": "Lucas studies Finance and Computer Science at Rutgers ('29). In summer 2026 he served as an Equity Research Intern on the TMT Hardware team at Minsheng Securities in Shanghai, covering the China–US AI supply chain — conducting channel checks, supporting AIDC power-demand forecasting and server BOM cost analysis, and contributing to research reports and valuation models. He was selected for the Goldman Sachs 2026 Possibilities Series and EY CHARGE 2026, and serves as Global Business Lead at Tutturo LLC.",
+      "leadership.bio": "Lucas studies Finance and Computer Science at Rutgers ('29). In summer 2026 he served as an Equity Research Intern on the TMT Hardware team at Minsheng Securities in Shanghai, covering the China–US AI supply chain — conducting channel checks, supporting AIDC power-demand forecasting and server BOM cost analysis, and contributing to research reports and valuation models. He was selected for the Goldman Sachs 2026 Possibilities Series and EY CHARGE 2026.",
       "leadership.linkedin": "LinkedIn",
       "leadership.cv": "Credentials",
       "cv.o1": "Minsheng Securities",
@@ -82,8 +82,6 @@
       "cv.r2": "2026 Possibilities Series · Selected",
       "cv.o3": "EY",
       "cv.r3": "CHARGE 2026 · Selected",
-      "cv.o4": "Tutturo LLC",
-      "cv.r4": "Global Business Lead",
 
       "membership.title": "Membership Enquiries",
       "membership.line": "We welcome conversations with students who share our standard.",
@@ -162,7 +160,7 @@
       "leadership.title": "领导团队",
       "leadership.role": "创始人 · 社长",
       "leadership.name": "Lucas Yan（ZhiYao）",
-      "leadership.bio": "罗格斯大学金融 + 计算机科学双修（2029 届）。2026 年夏任民生证券 TMT 硬件组行业研究实习生（上海），覆盖中美 AI 产业链，参与渠道调研、AIDC 电力需求测算、服务器 BOM 成本拆分，以及研究报告与估值模型的撰写。入选高盛 2026 Possibilities Series 与安永 EY CHARGE 2026 项目，现任 Tutturo LLC 全球业务负责人。",
+      "leadership.bio": "罗格斯大学金融 + 计算机科学双修（2029 届）。2026 年夏任民生证券 TMT 硬件组行业研究实习生（上海），覆盖中美 AI 产业链，参与渠道调研、AIDC 电力需求测算、服务器 BOM 成本拆分，以及研究报告与估值模型的撰写。入选高盛 2026 Possibilities Series 与安永 EY CHARGE 2026 项目。",
       "leadership.linkedin": "LinkedIn",
       "leadership.cv": "履历",
       "cv.o1": "民生证券",
@@ -171,8 +169,6 @@
       "cv.r2": "2026 Possibilities Series · 入选",
       "cv.o3": "安永",
       "cv.r3": "EY CHARGE 2026 · 入选",
-      "cv.o4": "Tutturo LLC",
-      "cv.r4": "全球业务负责人",
 
       "membership.title": "入会咨询",
       "membership.line": "欢迎认同我们标准的同学与我们联系。",
@@ -218,7 +214,32 @@
     var nodes = document.querySelectorAll("[data-i18n]");
     for (var i = 0; i < nodes.length; i++) {
       var val = t(nodes[i].getAttribute("data-i18n"));
-      if (typeof val === "string") nodes[i].textContent = val;
+      if (nodes[i].tagName === "TITLE") {
+        if (typeof val === "string") nodes[i].textContent = val;
+        continue;
+      }
+      // Both languages share one grid cell, so the box keeps the same size whichever is shown.
+      var stack = nodes[i].firstElementChild;
+      if (!stack || !stack.classList.contains("i18n")) {
+        var key = nodes[i].getAttribute("data-i18n");
+        stack = document.createElement("span");
+        stack.className = "i18n";
+        ["en", "zh"].forEach(function (l) {
+          var s = document.createElement("span");
+          s.setAttribute("lang", l === "zh" ? "zh-Hans" : "en");
+          s.setAttribute("data-l", l);
+          var v = Object.prototype.hasOwnProperty.call(DICT[l], key) ? DICT[l][key] : DICT.en[key];
+          s.textContent = typeof v === "string" ? v : nodes[i].textContent;
+          stack.appendChild(s);
+        });
+        nodes[i].textContent = "";
+        nodes[i].appendChild(stack);
+      }
+      for (var c = 0; c < stack.children.length; c++) {
+        var on = stack.children[c].getAttribute("data-l") === currentLang;
+        stack.children[c].classList.toggle("is-off", !on);
+        if (on) stack.children[c].removeAttribute("aria-hidden"); else stack.children[c].setAttribute("aria-hidden", "true");
+      }
     }
 
     var attrNodes = document.querySelectorAll("[data-i18n-attr]");
