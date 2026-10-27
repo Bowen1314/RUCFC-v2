@@ -7,14 +7,14 @@
   <meta name="description" content="Rutgers Chinese Finance Club — an undergraduate finance organization focused on global capital markets, technology-sector equities, and the Greater China economy.">
   <meta name="theme-color" content="#212730">
   <script>
-    /* Opening shot: full-bleed photo first, then the page fades in. Once per session. */
+    /* Opening shot on every load: the city starts zoomed in and pulls back into the page. */
     try {
       var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
       // Hide reveal targets before first paint so they don't flash and then fade out.
       if (!still && "IntersectionObserver" in window) document.documentElement.classList.add("js-motion");
-      if (!sessionStorage.getItem("rcfc-intro") && !still) {
+      if (!still) {
         document.documentElement.classList.add("intro");
-        sessionStorage.setItem("rcfc-intro", "1");
+        if ("scrollRestoration" in history) history.scrollRestoration = "manual"; // a reload starts at the opening shot
       }
     } catch (e) {}
   </script>

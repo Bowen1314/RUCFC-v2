@@ -457,33 +457,33 @@
   }
 
   /* ---------- Opening shot ---------- */
-  // <head> adds .intro on the first visit of a session; hold the bare photo, then bring the page in.
+  // <head> adds .intro on every load: the city starts zoomed in,
+  // then pulls back into the page; any input skips straight to a quick version.
   if (root.classList.contains("intro")) {
-    var INTRO_HOLD_MS = 1800;
+    var INTRO_HOLD_MS = 350;
+    var INPUTS = ["wheel", "touchstart", "keydown", "pointerdown"];
     var introDone = false;
-    var endIntro = function () {
+    var endIntro = function (e) {
       if (introDone) return;
       introDone = true;
-      root.classList.add("intro-run");
+      var fast = !!(e && e.type);
+      root.classList.add("intro-run", "intro-played");
+      if (fast) root.classList.add("intro-fast");
       root.classList.remove("intro");
       var heroItems = document.querySelectorAll(".hero .reveal");
       for (var h = 0; h < heroItems.length; h++) {
-        heroItems[h].style.transitionDelay = (0.35 + h * 0.18) + "s";
+        heroItems[h].style.transitionDelay = (fast ? 0.1 + h * 0.08 : 1.7 + h * 0.2) + "s";
         heroItems[h].classList.add("is-in");
         if (io) io.unobserve(heroItems[h]);
       }
-      ["wheel", "touchstart", "keydown", "pointerdown"].forEach(function (ev) {
-        window.removeEventListener(ev, endIntro);
-      });
+      INPUTS.forEach(function (ev) { window.removeEventListener(ev, endIntro); });
       setTimeout(function () {
-        root.classList.remove("intro-run");
+        root.classList.remove("intro-run", "intro-fast");
         for (var h = 0; h < heroItems.length; h++) heroItems[h].style.transitionDelay = "";
-      }, 2600);
+      }, fast ? 1500 : 4200);
     };
-    ["wheel", "touchstart", "keydown", "pointerdown"].forEach(function (ev) {
-      window.addEventListener(ev, endIntro, { passive: true });
-    });
-    // Start the hold once the photo is ready (it is preloaded), but never wait more than 1.2s for it.
+    INPUTS.forEach(function (ev) { window.addEventListener(ev, endIntro, { passive: true }); });
+    // Start once the photo is ready (it is preloaded), but never wait more than 1.2s for it.
     var heroImg = document.querySelector(".hero__media img");
     var startHold = function () { setTimeout(endIntro, INTRO_HOLD_MS); };
     if (!heroImg || heroImg.complete) startHold();

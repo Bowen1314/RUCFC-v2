@@ -203,14 +203,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 @keyframes heroZoom { to { transform: scale(1); } }
 
-/* Opening shot (.intro): bare, bright photo; .intro-run carries the fade into the page. */
+/* Opening shot: the city fills the screen zoomed in, then the camera pulls back into the page.
+   .intro = start frame, .intro-run = the pull-back, .intro-played = settled (no idle zoom afterwards). */
+.intro .hero__media img { animation: none; transform: scale(1.7); filter: brightness(1.15) saturate(1.05); }
 .intro .hero__media::after { opacity: 0; }
-.intro .hero__media img { filter: brightness(1.12) saturate(1.05); }
 .intro .nav, .intro .hero__strip, .intro .ticker { opacity: 0; }
-.intro-run .hero__media::after { transition: opacity 1.6s var(--ease); }
-.intro-run .hero__media img { transition: filter 1.6s var(--ease); }
-.intro-run .nav { transition: opacity 1s var(--ease) .9s, background .35s var(--ease), border-color .35s var(--ease); }
-.intro-run .hero__strip, .intro-run .ticker { transition: opacity 1s var(--ease) 1.1s; }
+.intro-played .hero__media img { animation: none; transform: none; }
+.intro-run .hero__media img { transition: transform 3s cubic-bezier(.22, .61, .2, 1), filter 2s var(--ease) .8s; }
+.intro-run .hero__media::after { transition: opacity 1.8s var(--ease) 1.2s; }
+.intro-run .nav { transition: opacity 1s var(--ease) 2.6s, background .35s var(--ease), border-color .35s var(--ease); }
+.intro-run .hero__strip, .intro-run .ticker { transition: opacity 1s var(--ease) 2.8s; }
+/* Skipped by the visitor: same path, much faster. */
+.intro-fast .hero__media img { transition-duration: .7s, .5s; transition-delay: 0s, 0s; }
+.intro-fast .hero__media::after { transition-duration: .5s; transition-delay: 0s; }
+.intro-fast .nav, .intro-fast .hero__strip, .intro-fast .ticker { transition-delay: .3s; }
 
 .hero__body { position: relative; padding-top: 160px; padding-bottom: 72px; }
 .hero__title {
