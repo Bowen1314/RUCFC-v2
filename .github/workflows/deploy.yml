@@ -1,0 +1,49 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Refresh ticker prices. GitHub runs these on a best-effort basis (often 5–15 min apart).
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site
+          cp index.html styles.css main.js _site/
+          mkdir -p _site/assets
+          cp -r assets/photos assets/tickers assets/mark.png assets/logo-dark-600.png _site/assets/
+
+      - name: Fetch quotes
+        run: python3 scripts/fetch_quotes.py _site/quotes.json "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/quotes.json"
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

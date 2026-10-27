@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="meta.title">RUCFC — Rutgers Chinese Finance Club</title>
+  <meta name="description" content="Rutgers Chinese Finance Club — a finance collective at the nexus of global capital markets, technology, and the Greater China economy.">
+  <meta name="theme-color" content="#212730">
+  <link rel="icon" type="image/png" href="assets/mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/photos/hero-manhattan.jpg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="top">
+    <div class="nav__inner wrap">
+      <a class="brand" href="#top" data-i18n-attr="aria-label:a11y.home" aria-label="RUCFC — home">
+        <img class="brand__mark" src="assets/mark.png" width="40" height="40" alt="">
+        <span class="brand__text">
+          <span class="brand__name">RUCFC</span>
+          <span class="brand__sub" data-i18n="brand.sub">Rutgers Chinese Finance Club</span>
+        </span>
+      </a>
+
+      <nav class="menu" id="site-menu" data-i18n-attr="aria-label:a11y.primary" aria-label="Primary">
+        <a href="#club" data-i18n="nav.club">The Club</a>
+        <a href="#programs" data-i18n="nav.programs">Programs</a>
+        <a href="#standard" data-i18n="nav.standard">Standard</a>
+        <a href="#leadership" data-i18n="nav.leadership">Leadership</a>
+        <a class="menu__cta" href="#membership" data-i18n="nav.membership">Membership</a>
+      </nav>
+
+      <div class="nav__tools">
+        <div class="lang" role="group" data-i18n-attr="aria-label:a11y.lang" aria-label="Language">
+          <button class="lang__btn" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang__btn" type="button" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
+        <button class="menu-toggle" type="button" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__media" aria-hidden="true">
+        <img src="assets/photos/hero-manhattan.jpg" alt="">
+      </div>
+      <div class="hero__body wrap">
+        <p class="eyebrow reveal"><span class="eyebrow__dash"></span><span data-i18n="hero.eyebrow">Founding Cohort · Fall 2026</span></p>
+        <h1 class="hero__title reveal">
+          <span data-i18n="hero.t1">Rigour.</span>
+          <span data-i18n="hero.t2">Conviction.</span>
+          <span class="hero__accent" data-i18n="hero.t3">Perspective.</span>
+        </h1>
+        <div class="hero__foot reveal">
+          <p class="hero__lead" data-i18n="hero.lead">A Rutgers finance collective at the nexus of global capital markets, technology, and the Greater China economy.</p>
+          <div class="hero__ctas">
+            <a class="btn btn--light" href="https://docs.google.com/forms/d/e/1FAIpQLSejjOl4pe0uux4EFgA-422cIIHpvoisIeId5vv1sS0zmfvwCQ/viewform?usp=header" target="_blank" rel="noopener"><span data-i18n="hero.cta">Request Membership Information</span><i class="arrow" aria-hidden="true"></i></a>
+            <a class="link link--light" href="#standard"><span data-i18n="hero.cta2">Our Standard</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="hero__strip">
+        <ul class="wrap strip">
+          <li data-i18n="strip.v1">Est. 2026</li>
+          <li data-i18n="strip.v2">New Brunswick, NJ</li>
+          <li data-i18n="strip.v3">Capital Markets</li>
+          <li data-i18n="strip.v4">Technology</li>
+          <li data-i18n="strip.v5">Greater China</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ LIVE TICKER ============ -->
+    <section class="ticker" id="ticker" hidden data-i18n-attr="aria-label:ticker.label" aria-label="Market prices">
+      <div class="ticker__viewport">
+        <ul class="ticker__track" id="ticker-track"></ul>
+      </div>
+    </section>
+
+    <!-- ============ 01 THE CLUB ============ -->
+    <section class="section club" id="club">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <p class="sec-label"><span class="sec-num">01</span><span data-i18n="club.title">The Club</span></p>
+          <h2 class="statement" data-i18n="club.statement">Undergraduate finance, practiced at professional standard.</h2>
+        </header>
+
+        <div class="club__grid">
+          <div class="club__text reveal">
+            <p class="lead" data-i18n="club.p1">Rutgers Chinese Finance Club (RUCFC) is a finance collective at Rutgers University–New Brunswick, dedicated to the intersection of global capital markets, technology, and the Greater China economy.</p>
+            <p class="body" data-i18n="club.p2">Founded in 2026 by a Finance + Computer Science student whose sell-side equity research covered the AI hardware supply chain, RUCFC is built on a single premise: undergraduate finance should be practiced at professional standard, not merely studied.</p>
+            <p class="club__quote" data-i18n="club.quote">Bridging Eastern and Western business cultures.</p>
+          </div>
+
+          <div class="cities reveal">
+            <figure class="city">
+              <div class="city__img"><img src="assets/photos/new-york.jpg" alt="" loading="lazy"></div>
+              <figcaption><span data-i18n="club.capNY">New York</span><span class="city__co">40.71° N</span></figcaption>
+            </figure>
+            <figure class="city city--offset">
+              <div class="city__img"><img src="assets/photos/shanghai.jpg" alt="" loading="lazy"></div>
+              <figcaption><span data-i18n="club.capSH">Shanghai</span><span class="city__co">31.23° N</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 PROGRAMS ============ -->
+    <section class="section programs" id="programs">
+      <div class="wrap programs__grid">
+        <div class="programs__aside reveal">
+          <p class="sec-label"><span class="sec-num">02</span><span data-i18n="programs.title">Programs</span></p>
+          <h2 class="h2" data-i18n="programs.kicker">Three disciplines, one standard.</h2>
+          <div class="programs__img"><img src="assets/photos/markets.jpg" alt="" loading="lazy"></div>
+        </div>
+
+        <ol class="plist">
+          <li class="pitem reveal">
+            <span class="pitem__no">I</span>
+            <div>
+              <h3 class="pitem__t" data-i18n="programs.t1">Institutional-Grade Research</h3>
+              <p class="pitem__d" data-i18n="programs.d1">Sector deep-dives and equity theses built on sell-side research methodology — from supply-chain channel checks to valuation.</p>
+            </div>
+          </li>
+          <li class="pitem reveal">
+            <span class="pitem__no">II</span>
+            <div>
+              <h3 class="pitem__t" data-i18n="programs.t2">Professional Credentialing</h3>
+              <p class="pitem__d" data-i18n="programs.d2">Bloomberg Terminal, BMC, and ESG certification tracks, paired with AI-augmented analytical workflows.</p>
+            </div>
+          </li>
+          <li class="pitem reveal">
+            <span class="pitem__no">III</span>
+            <div>
+              <h3 class="pitem__t" data-i18n="programs.t3">Closed-Door Access</h3>
+              <p class="pitem__d" data-i18n="programs.d3">Off-record sessions with frontline practitioners, and a close-knit, high-calibre peer network.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 03 STANDARD ============ -->
+    <section class="section standard" id="standard">
+      <div class="wrap">
+        <header class="standard__head reveal">
+          <p class="sec-label sec-label--light"><span class="sec-num">03</span><span data-i18n="standard.title">The Standard</span></p>
+          <h2 class="statement statement--light" data-i18n="standard.intro">We hold ourselves to the standard of the profession we intend to enter.</h2>
+        </header>
+
+        <ol class="tenets">
+          <li class="tenet reveal">
+            <span class="tenet__no">I</span>
+            <h3 class="tenet__t" data-i18n="standard.t1">Rigour</h3>
+            <p class="tenet__d" data-i18n="standard.d1">Every view is supported by evidence, and every model can be defended line by line.</p>
+          </li>
+          <li class="tenet reveal">
+            <span class="tenet__no">II</span>
+            <h3 class="tenet__t" data-i18n="standard.t2">Conviction</h3>
+            <p class="tenet__d" data-i18n="standard.d2">We form independent theses and are prepared to be measured against them.</p>
+          </li>
+          <li class="tenet reveal">
+            <span class="tenet__no">III</span>
+            <h3 class="tenet__t" data-i18n="standard.t3">Contribution</h3>
+            <p class="tenet__d" data-i18n="standard.d3">Members are expected to give as much to the collective as they take from it.</p>
+          </li>
+        </ol>
+
+        <p class="standard__note reveal" data-i18n="standard.note">Founding members will shape the club's research agenda, standards, and culture from day one.</p>
+      </div>
+    </section>
+
+    <!-- ============ 04 LEADERSHIP ============ -->
+    <section class="section leadership" id="leadership">
+      <div class="wrap">
+        <p class="sec-label reveal"><span class="sec-num">04</span><span data-i18n="leadership.title">Leadership</span></p>
+
+        <article class="leader reveal">
+          <div class="leader__plate" aria-hidden="true">
+            <img src="assets/mark.png" alt="" class="leader__mark">
+            <span class="leader__mono">LY</span>
+            <span class="leader__plate-foot">Founder · 2026</span>
+          </div>
+
+          <div class="leader__main">
+            <p class="leader__role" data-i18n="leadership.role">Founder &amp; President</p>
+            <h3 class="leader__name" data-i18n="leadership.name">Lucas (ZhiYao) Yan</h3>
+            <p class="leader__bio" data-i18n="leadership.bio">Lucas studies Finance and Computer Science at Rutgers ('29). In summer 2026 he served as an Equity Research Intern on the TMT Hardware team at Minsheng Securities in Shanghai, covering the China–US AI supply chain — conducting channel checks, supporting AIDC power-demand forecasting and server BOM cost analysis, and contributing to research reports and valuation models. He was selected for the Goldman Sachs 2026 Possibilities Series and EY CHARGE 2026, and serves as Global Business Lead at Tutturo LLC.</p>
+
+            <dl class="cv">
+              <div class="cv__row"><dt data-i18n="cv.o1">Minsheng Securities</dt><dd data-i18n="cv.r1">Equity Research Intern, TMT Hardware · 2026</dd></div>
+              <div class="cv__row"><dt data-i18n="cv.o2">Goldman Sachs</dt><dd data-i18n="cv.r2">2026 Possibilities Series · Selected</dd></div>
+              <div class="cv__row"><dt data-i18n="cv.o3">EY</dt><dd data-i18n="cv.r3">CHARGE 2026 · Selected</dd></div>
+              <div class="cv__row"><dt data-i18n="cv.o4">Tutturo LLC</dt><dd data-i18n="cv.r4">Global Business Lead</dd></div>
+            </dl>
+
+            <a class="link" href="https://www.linkedin.com/in/lucasyanzy/" target="_blank" rel="noopener"><span data-i18n="leadership.linkedin">LinkedIn</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 05 MEMBERSHIP ============ -->
+    <section class="membership" id="membership">
+      <div class="membership__media" aria-hidden="true"><img src="assets/photos/skyline.jpg" alt="" loading="lazy"></div>
+      <div class="wrap membership__body reveal">
+        <p class="sec-label sec-label--light"><span class="sec-num">05</span><span data-i18n="nav.membership">Membership</span></p>
+        <h2 class="membership__title" data-i18n="membership.title">Membership Enquiries</h2>
+        <p class="membership__line" data-i18n="membership.line">We welcome conversations with students who share our standard.</p>
+        <a class="btn btn--light" href="https://docs.google.com/forms/d/e/1FAIpQLSejjOl4pe0uux4EFgA-422cIIHpvoisIeId5vv1sS0zmfvwCQ/viewform?usp=header" target="_blank" rel="noopener"><span data-i18n="membership.cta">Request Information</span><i class="arrow" aria-hidden="true"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <img src="assets/logo-dark-600.png" width="120" height="120" data-i18n-attr="alt:a11y.seal" alt="RUCFC circular wordmark">
+        <div>
+          <p class="footer__name">Rutgers Chinese Finance Club</p>
+          <p class="footer__zh">罗格斯华人金融俱乐部</p>
+          <p class="footer__uni" data-i18n="footer.uni">Rutgers University–New Brunswick</p>
+        </div>
+      </div>
+
+      <nav class="footer__col" aria-label="Sections">
+        <a href="#club" data-i18n="nav.club">The Club</a>
+        <a href="#programs" data-i18n="nav.programs">Programs</a>
+        <a href="#standard" data-i18n="nav.standard">Standard</a>
+        <a href="#leadership" data-i18n="nav.leadership">Leadership</a>
+      </nav>
+
+      <nav class="footer__col" data-i18n-attr="aria-label:a11y.channels" aria-label="Club channels">
+        <a href="https://www.linkedin.com/company/rutgers-chinese-finance-club/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://discord.gg/1518963490772094996" target="_blank" rel="noopener">Discord</a>
+        <a href="#membership" data-i18n="nav.membership">Membership</a>
+      </nav>
+    </div>
+    <div class="wrap footer__base">
+      <span>© 2026 Rutgers Chinese Finance Club</span>
+      <span data-i18n="footer.disclaimer">An independent student organization at Rutgers University.</span>
+      <span data-i18n="footer.data">Market data delayed · for reference only</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
