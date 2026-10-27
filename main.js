@@ -414,13 +414,22 @@
   }, { passive: true });
 
   /* ---------- Language buttons ---------- */
+  var LANG_FADE_MS = 180;
+  var langTimer;
   var langBtns = document.querySelectorAll(".lang__btn");
   for (var n = 0; n < langBtns.length; n++) {
     langBtns[n].addEventListener("click", function (e) {
       var lang = this.getAttribute("data-lang");
-      applyLang(lang);
       if (e.detail > 0) this.blur(); // mouse/touch: no lingering focus ring; keyboard keeps it
       saveLang(lang);
+      if (lang === currentLang) return;
+      // Single-line labels fade out, swap, fade back in; text blocks crossfade in place (CSS).
+      clearTimeout(langTimer);
+      root.classList.add("lang-out");
+      langTimer = setTimeout(function () {
+        applyLang(lang);
+        langTimer = setTimeout(function () { root.classList.remove("lang-out"); }, 30);
+      }, LANG_FADE_MS);
     });
   }
 

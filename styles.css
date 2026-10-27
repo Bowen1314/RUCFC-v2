@@ -508,5 +508,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .i18n--inline { display: inline-grid; max-width: 100%; vertical-align: top; }
 .i18n--inline > .is-off { display: none; }
 .i18n > span { grid-area: 1 / 1; }
-.i18n > .is-off { visibility: hidden; }
+.i18n > span { transition: opacity .45s var(--ease), visibility 0s linear 0s; }
+.i18n > .is-off { visibility: hidden; opacity: 0; transition: opacity .45s var(--ease), visibility 0s linear .45s; }
+.i18n--inline, .tk__name { transition: opacity .18s ease; }
+.lang-out .i18n--inline, .lang-out .tk__name { opacity: 0; }
 .i18n > [lang="zh-Hans"] { font-family: "Noto Sans SC", "Inter", system-ui, sans-serif; }
