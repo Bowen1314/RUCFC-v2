@@ -353,7 +353,7 @@
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (data) {
         var list = data.quotes || [];
-        if (!list.length) return;
+        if (!list.length) { if (!order.length) ticker.hidden = true; return; }
         var fresh = !order.length;
         list.forEach(function (q) {
           var old = quotes[q.s];
@@ -371,12 +371,15 @@
           build();
         }
       })
-      .catch(function () { /* no quotes (e.g. offline) — the banner stays hidden */ });
+      // The band is laid out from the start (so the first screen never resizes); hide it only if no quotes ever arrive.
+      .catch(function () { if (!order.length) ticker.hidden = true; });
   }
 
   if (ticker && track && window.fetch) {
     load();
     setInterval(function () { if (!document.hidden) load(); }, POLL_MS);
+  } else if (ticker) {
+    ticker.hidden = true;
   }
 
   /* ---------- Mobile menu ---------- */
