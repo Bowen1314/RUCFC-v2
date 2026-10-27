@@ -232,6 +232,12 @@
           s.textContent = typeof v === "string" ? v : nodes[i].textContent;
           stack.appendChild(s);
         });
+        // Single-line labels (inline, or items in a flex row) only show the active language;
+        // reserving the other language's width there leaves visible gaps.
+        var host = nodes[i];
+        if (/^inline/.test(getComputedStyle(host).display) || (!/^(P|H\d)$/.test(host.tagName) && /flex/.test(getComputedStyle(host.parentElement).display))) {
+          stack.classList.add("i18n--inline");
+        }
         nodes[i].textContent = "";
         nodes[i].appendChild(stack);
       }
@@ -410,9 +416,10 @@
   /* ---------- Language buttons ---------- */
   var langBtns = document.querySelectorAll(".lang__btn");
   for (var n = 0; n < langBtns.length; n++) {
-    langBtns[n].addEventListener("click", function () {
+    langBtns[n].addEventListener("click", function (e) {
       var lang = this.getAttribute("data-lang");
       applyLang(lang);
+      if (e.detail > 0) this.blur(); // mouse/touch: no lingering focus ring; keyboard keeps it
       saveLang(lang);
     });
   }

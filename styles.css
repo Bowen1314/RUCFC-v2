@@ -462,7 +462,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
   .hero__body { padding-top: 120px; padding-bottom: 48px; }
   .hero__foot { margin-top: 40px; }
-  .hero__ctas { gap: 24px; }
+  .hero__ctas { gap: 24px; flex-direction: column; align-items: flex-start; }
   .btn { height: 52px; padding: 0 22px; font-size: 14px; }
   .strip { grid-template-columns: repeat(2, 1fr); }
   .strip li { padding: 14px 0; }
@@ -504,7 +504,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 /* i18n: both languages occupy the same cell; the inactive one is invisible but keeps its space */
-.i18n { display: inline-grid; max-width: 100%; }
+.i18n { display: grid; }
+.i18n--inline { display: inline-grid; max-width: 100%; vertical-align: top; }
+.i18n--inline > .is-off { display: none; }
 .i18n > span { grid-area: 1 / 1; }
 .i18n > .is-off { visibility: hidden; }
 .i18n > [lang="zh-Hans"] { font-family: "Noto Sans SC", "Inter", system-ui, sans-serif; }
