@@ -446,7 +446,7 @@
     root.classList.add("js-motion");
     var io = new IntersectionObserver(function (entries) {
       for (var i = 0; i < entries.length; i++) {
-        if (entries[i].isIntersecting) {
+        if (entries[i].isIntersecting && !(root.classList.contains("intro") && entries[i].target.closest(".hero"))) {
           entries[i].target.classList.add("is-in");
           io.unobserve(entries[i].target);
         }
@@ -454,6 +454,46 @@
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     var items = document.querySelectorAll(".reveal");
     for (var r = 0; r < items.length; r++) io.observe(items[r]);
+  }
+
+  /* ---------- Opening shot ---------- */
+  // <head> adds .intro on the first visit of a session; hold the bare photo, then bring the page in.
+  if (root.classList.contains("intro")) {
+    var INTRO_HOLD_MS = 1800;
+    var introDone = false;
+    var endIntro = function () {
+      if (introDone) return;
+      introDone = true;
+      root.classList.add("intro-run");
+      root.classList.remove("intro");
+      var heroItems = document.querySelectorAll(".hero .reveal");
+      for (var h = 0; h < heroItems.length; h++) {
+        heroItems[h].style.transitionDelay = (0.35 + h * 0.18) + "s";
+        heroItems[h].classList.add("is-in");
+        if (io) io.unobserve(heroItems[h]);
+      }
+      ["wheel", "touchstart", "keydown", "pointerdown"].forEach(function (ev) {
+        window.removeEventListener(ev, endIntro);
+      });
+      setTimeout(function () {
+        root.classList.remove("intro-run");
+        for (var h = 0; h < heroItems.length; h++) heroItems[h].style.transitionDelay = "";
+      }, 2600);
+    };
+    ["wheel", "touchstart", "keydown", "pointerdown"].forEach(function (ev) {
+      window.addEventListener(ev, endIntro, { passive: true });
+    });
+    // Start the hold once the photo is ready (it is preloaded), but never wait more than 1.2s for it.
+    var heroImg = document.querySelector(".hero__media img");
+    var startHold = function () { setTimeout(endIntro, INTRO_HOLD_MS); };
+    if (!heroImg || heroImg.complete) startHold();
+    else {
+      var held = false;
+      var once = function () { if (!held) { held = true; startHold(); } };
+      heroImg.addEventListener("load", once);
+      heroImg.addEventListener("error", once);
+      setTimeout(once, 1200);
+    }
   }
 
   applyLang(readLang());

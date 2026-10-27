@@ -4,8 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title data-i18n="meta.title">RCFC — Rutgers Chinese Finance Club</title>
-  <meta name="description" content="Rutgers Chinese Finance Club — a finance collective at the nexus of global capital markets, technology, and the Greater China economy.">
+  <meta name="description" content="Rutgers Chinese Finance Club — an undergraduate finance organization focused on global capital markets, technology-sector equities, and the Greater China economy.">
   <meta name="theme-color" content="#212730">
+  <script>
+    /* Opening shot: full-bleed photo first, then the page fades in. Once per session. */
+    try {
+      var still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // Hide reveal targets before first paint so they don't flash and then fade out.
+      if (!still && "IntersectionObserver" in window) document.documentElement.classList.add("js-motion");
+      if (!sessionStorage.getItem("rcfc-intro") && !still) {
+        document.documentElement.classList.add("intro");
+        sessionStorage.setItem("rcfc-intro", "1");
+      }
+    } catch (e) {}
+  </script>
   <link rel="icon" type="image/png" href="assets/mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
