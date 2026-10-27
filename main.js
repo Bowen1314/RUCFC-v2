@@ -463,7 +463,7 @@
   // <head> adds .intro on every load: the city starts zoomed in,
   // then pulls back into the page; any input skips straight to a quick version.
   if (root.classList.contains("intro")) {
-    var INTRO_HOLD_MS = 350;
+    var INTRO_HOLD_MS = 200;
     var INPUTS = ["wheel", "touchstart", "keydown", "pointerdown"];
     var introDone = false;
     var endIntro = function (e) {
@@ -475,7 +475,7 @@
       root.classList.remove("intro");
       var heroItems = document.querySelectorAll(".hero .reveal");
       for (var h = 0; h < heroItems.length; h++) {
-        heroItems[h].style.transitionDelay = (fast ? 0.1 + h * 0.08 : 1.7 + h * 0.2) + "s";
+        heroItems[h].style.transitionDelay = (fast ? 0.1 + h * 0.08 : 0.8 + h * 0.12) + "s";
         heroItems[h].classList.add("is-in");
         if (io) io.unobserve(heroItems[h]);
       }
@@ -483,7 +483,7 @@
       setTimeout(function () {
         root.classList.remove("intro-run", "intro-fast");
         for (var h = 0; h < heroItems.length; h++) heroItems[h].style.transitionDelay = "";
-      }, fast ? 1500 : 4200);
+      }, fast ? 1500 : 2600);
     };
     INPUTS.forEach(function (ev) { window.addEventListener(ev, endIntro, { passive: true }); });
     // Start once the photo is ready (it is preloaded), but never wait more than 1.2s for it.
